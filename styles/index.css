@@ -1,7 +1,21 @@
 @tailwind base;
 
 /* Write your own custom base styles here */
-
+#canvas{
+ position: absolute;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0; 
+ background-color: #efefef;
+ z-index: -1;
+}
+.frame{
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(255,0,170,25%)
+}
 /* Start purging... */
 @tailwind components;
 /* Stop purging. */
