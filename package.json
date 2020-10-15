@@ -11,7 +11,8 @@
     "next": "latest",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-draggable": "^4.4.3"
+    "react-draggable": "^4.4.3",
+    "recoil": "^0.0.13"
   },
   "devDependencies": {
     "postcss-flexbugs-fixes": "4.2.1",
