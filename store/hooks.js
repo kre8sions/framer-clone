@@ -19,6 +19,14 @@ export const useAddItem = () => {
   };
 };
 
+export const useAddFrame = () => {
+  const[items,setItems] = useRecoilState(canvasStore)
+  return () => {
+    const {clone} = cloneIndex(items)
+    setItems([...clone, {name: "frame"}])
+  }
+}
+
 export const useRemoveItem = () => {
 	const [items, setItems] = useRecoilState(canvasStore);
 	return (product) => {
