@@ -1,3 +1,3 @@
-export { canvasStore } from './atoms';
+export { canvasStore, zoomLevel, focused, frameAtom,selectedFrameIdState } from './atoms';
 export { canvasStoreState } from './selectors';
-export { useAddItem, useDecreaseItem, useRemoveItem, useAddFrame } from './hooks'
+export {  useAddFrame } from './hooks'

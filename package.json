@@ -12,6 +12,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-draggable": "^4.4.3",
+    "react-zoom-pan-pinch": "^1.6.1",
     "recoil": "^0.0.13"
   },
   "devDependencies": {
