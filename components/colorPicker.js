@@ -1,24 +1,7 @@
 import React from "react";
-import { useRecoilState, selector } from "recoil";
-import { frameAtom, selectedFrameIdState } from "../store";
+import { useRecoilState } from "recoil";
+import { selectedElementState } from "../store";
 
-const selectedElementState = selector({
-  key: "selectedElement",
-  get: ({ get }) => {
-    const id = get(selectedFrameIdState);
-
-    if (id != null) {
-      return get(frameAtom(id));
-    }
-  },
-  set: ({ set, get }, newElementValue) => {
-    const id = get(selectedFrameIdState);
-
-    if (id != null) {
-      set(frameAtom(id), newElementValue);
-    }
-  }
-});
 
 export default function ColorPicker() {
   const [selectedElement, setSelectedElement] = useRecoilState(
@@ -30,11 +13,12 @@ export default function ColorPicker() {
     <div>
       <input
         type="color"
-        value={selectedElement.backgroundColor}
+        value={selectedElement.styles.backgroundColor}
         onChange={(color) => {
           setSelectedElement({
             ...selectedElement,
-            backgroundColor: color.target.value
+            styles:{...selectedElement.styles,
+              backgroundColor: color.target.value}
           });
         }}
       ></input>

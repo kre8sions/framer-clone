@@ -1,41 +1,71 @@
-import Draggable from 'react-draggable';
+import Moveable from 'react-moveable'
 import {useState,useRef,useEffect} from 'react'  
-import {focused, canvasStore,frameAtom,selectedFrameIdState} from '../store'
+import {frameAtom,selectedFrameIdState} from '../store'
 import {useRecoilState, useSetRecoilState} from 'recoil'
 
-
-export default function Frame ({children,index,id}) {
-  const [frame] = useRecoilState(frameAtom(id))
+export default function Frame ({id}) {
+  const [layer,setLayer] = useRecoilState(frameAtom(id))
   const setSelectedFrame = useSetRecoilState(selectedFrameIdState)
 
   function onClick() {
-    setSelectedFrame(id);
-    console.log("selectedElement", { ...frame });
+    setSelectedFrame(id)
   }
-
-
-
+  
   return(
 
-    <Draggable
-      axis="both"
-      handle={`.handle`}
-      defaultPosition={{x: 0, y: 0}}
-      position={null}
-      scale={1}
-      grid={[1,1]}
-      
-      >
-      <div 
-        className={` frame handle`}
-        style={{...frame, position:"absolute"}}
-        onClick={onClick}   
-      >
-        <div>Frame</div>
-        <div>X:</div>
-        <p>{children}</p>
-      </div>
-     </Draggable>
-
+     <>
+        <div className={`frame-${id}`} style={{...layer.styles,
+        transform:
+          `translate(${layer.transform.translateX}px, ${layer.transform.translateY}px)
+           rotate(${layer.transform.rotate}deg)`
+        }}>Target</div>
+        <Moveable
+            onClick={onClick}
+            target={`.frame-${id}`}
+            originDraggable={true}
+            originRelative={true}
+            draggable={true}
+            throttleDrag={0}
+            startDragRotate={0}
+            throttleDragRotate={0}
+            zoom={1}
+            origin={true}
+            padding={{"left":0,"top":0,"right":0,"bottom":0}}
+            rotatable={true}
+            throttleRotate={0}
+            rotationPosition={"top"}
+            onDragOriginStart={({ dragStart }) => {
+                dragStart && dragStart.set(layer.transform.translate)
+            }}
+            onDragOrigin={({ drag, transformOrigin }) => {
+                setLayer({...layer,
+                transform:{...layer.transform,
+                  translate: drag.beforeTranslate,
+                  transformOrigin: transformOrigin
+                }})
+            }}
+            onDragStart={({ set }) => {
+                set(layer.transform.translate)
+            }}
+            onDrag={({ beforeTranslate }) => {
+                setLayer({...layer,
+                transform:{...layer.transform, 
+                  translate: beforeTranslate,
+                  translateX: beforeTranslate[0],
+                  translateY: beforeTranslate[1],
+                }}) 
+                onClick()
+            }}
+            onRotateStart={({ set }) => {
+                set(layer.transform.rotate)
+            }}
+            onRotate={({ beforeRotate }) => {
+                setLayer({...layer,
+                transform:{...layer.transform, 
+                  rotate: beforeRotate
+                }})
+            }}
+        />
+    </>
   )
 }

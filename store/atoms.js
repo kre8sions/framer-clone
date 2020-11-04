@@ -1,4 +1,4 @@
-import { atom, atomFamily } from "recoil";
+import { atom, atomFamily,selector } from "recoil";
 
 export const canvasStore = atom({
   key: "canvasStore",
@@ -18,15 +18,44 @@ export const focused = atom({
 export const frameAtom = atomFamily({
   key: 'frameState',
   default:{ 
-      top: 400,
-      left: 200,
-      backgroundColor: "#ffaaaa",
-      width:"200px",
-      height:"200px"
+      styles:{
+        top: 0,
+        left: 0,
+        backgroundColor: "#ffaaaa",
+        width:"200px",
+        height:"200px",
+        opacity:1,
+        position:"absolute",
+      },
+      transform:{
+        rotate:0,
+        translate:[0,0],
+        translateX:0,
+        translateY:0,
+        transformOrigin:"50% 50%",
+      },
     }
 })
 
 export const selectedFrameIdState = atom({
   key: "selectedElementIdState",
   default: null
+});
+
+export const selectedElementState = selector({
+  key: "selectedElement",
+  get: ({ get }) => {
+    const id = get(selectedFrameIdState);
+
+    if (id != null) {
+      return get(frameAtom(id));
+    }
+  },
+  set: ({ set, get }, newElementValue) => {
+    const id = get(selectedFrameIdState);
+
+    if (id != null) {
+      set(frameAtom(id), newElementValue);
+    }
+  }
 });

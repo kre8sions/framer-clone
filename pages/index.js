@@ -23,6 +23,7 @@ export default function IndexPage() {
         })}
 
       </Canvas>
+      {/* <iframe src="/canvasPage" style={{backgroundColor: "skyblue"}}></iframe> */}
       </div>
   )
 }
