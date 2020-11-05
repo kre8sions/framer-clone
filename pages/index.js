@@ -1,5 +1,3 @@
-
-import Draggable from 'react-draggable'
 import PropertyPanel from '../components/propertyPanel'
 import Canvas from '../components/canvas'
 import Frame from '../components/frame'
