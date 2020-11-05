@@ -32,7 +32,6 @@ export default function Rotation() {
             ...selectedElement,
             transform:{ ...selectedElement.transform, rotate: rotation.target.value}
           });
-          console.log(selectedElement.rotate)
         }}
        
         onKeyPress={handleKeyPress}
