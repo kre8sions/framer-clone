@@ -7,16 +7,6 @@ export default function Position() {
   );
 
 
-  // function handleKeyPress(e) {
-  //   if(e.charCode == 13){
-  //     setSelectedElement({
-  //       ...selectedElement,
-  //       transform:{ ...selectedElement.transform, translateX: e.target.value}
-  //     });
-    
-  //   }
-  // }
-
   if (!selectedElement) return null;
   return (
     <div className="">
@@ -25,27 +15,25 @@ export default function Position() {
         type="number"
         maxLength={3}
         step="1"
-        value={selectedElement.transform.translateX}
+        value={Math.floor(selectedElement.transform.translateX)}
         onChange={(translateX) => {
           setSelectedElement({
             ...selectedElement,
             transform:{ ...selectedElement.transform, translateX: translateX.target.value}
           });
         }}
-        // onKeyPress={handleKeyPress}
       ></input>
       <input
         type="number"
         maxLength={3}
         step="1"
-        value={selectedElement.transform.translateY}
+        value={Math.floor(selectedElement.transform.translateY)}
         onChange={(translateY) => {
           setSelectedElement({
             ...selectedElement,
             transform:{ ...selectedElement.transform, translateY: translateY.target.value}
           });
         }}
-        // onKeyPress={handleKeyPress}
       ></input>
     </div>
   );

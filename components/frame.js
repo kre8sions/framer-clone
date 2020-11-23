@@ -1,18 +1,16 @@
 import Moveable from 'react-moveable'
-import {useState,useRef,useEffect} from 'react'  
 import {frameAtom,selectedFrameIdState} from '../store'
-import {useRecoilState, useSetRecoilState} from 'recoil'
+import {useRecoilState} from 'recoil'
 
 export default function Frame ({id}) {
   const [layer,setLayer] = useRecoilState(frameAtom(id))
-  const setSelectedFrame = useSetRecoilState(selectedFrameIdState)
+  const [selectedFrameId,setSelectedFrame]= useRecoilState(selectedFrameIdState)
 
   function onClick() {
     setSelectedFrame(id)
   }
-  
-  return(
 
+  return(
      <>
         <div className={`frame-${id}`} style={{...layer.styles,
         transform:
@@ -62,7 +60,7 @@ export default function Frame ({id}) {
             onRotate={({ beforeRotate }) => {
                 setLayer({...layer,
                 transform:{...layer.transform, 
-                  rotate: beforeRotate
+                  rotate: Math.floor(beforeRotate)
                 }})
             }}
         />

@@ -13,7 +13,6 @@ export default function Rotation() {
         ...selectedElement,
         transform:{ ...selectedElement.transform, rotate: e.target.value}
       });
-    
     }
   }
 
@@ -26,14 +25,13 @@ export default function Rotation() {
         max="360"
         maxLength={3}
         step="1"
-        defaultValue={0}
+        value={selectedElement.transform.rotate}
         onChange={(rotation) => {
           setSelectedElement({
             ...selectedElement,
             transform:{ ...selectedElement.transform, rotate: rotation.target.value}
           });
         }}
-       
         onKeyPress={handleKeyPress}
       ></input>
     </div>

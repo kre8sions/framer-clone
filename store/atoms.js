@@ -19,8 +19,8 @@ export const frameAtom = atomFamily({
   key: 'frameState',
   default:{ 
       styles:{
-        top: 0,
-        left: 0,
+        top: 100,
+        left: 500,
         backgroundColor: "#ffaaaa",
         width:"200px",
         height:"200px",

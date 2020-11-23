@@ -4,6 +4,7 @@ import Frame from '../components/frame'
 
 import {useRecoilValue,useRecoilState} from 'recoil'
 import {canvasStore} from '../store'
+import LayerPanel from '../components/layerPanel'
 
 export default function IndexPage() {
   const frames = useRecoilValue(canvasStore)
@@ -11,6 +12,7 @@ export default function IndexPage() {
   return (
     <div className="">
       <PropertyPanel/>
+      <LayerPanel/>
         <p>Frames in Canvas:{`${frames.length}`}</p>
   
       <Canvas>

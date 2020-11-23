@@ -48,9 +48,7 @@ export default function Opacity() {
             ...selectedElement,
             styles:{...selectedElement.styles, opacity: opacity.target.value / 100}
           });
-          
         }}
-       
         onKeyPress={handleKeyPress}
       ></input>
     </div>
